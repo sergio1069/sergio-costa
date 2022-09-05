@@ -6,13 +6,16 @@ let password = document.getElementById("password").value;
 if (usuario ==="" || password ==="") {
     alert ("Favor completar datos");
 } else{
-    location.href="index.html";
-    sessionStorage.name = usuario
-    window.location.href = "index.html"
+   // location.href="index.html";
+    sessionStorage.setItem("user", usuario);
+    window.location.href = "index.html";
 }
 }
+
+
  document.addEventListener ("DOMContentLoaded",()=>{
     document.getElementById("inicio").addEventListener("click",()=>{
-    login();
+   
+     login();     
     })
  })
