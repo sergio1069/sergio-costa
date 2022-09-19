@@ -13,11 +13,6 @@
 </head>
 
 <body>
-
-  <li class="nav-item">
-    <p class="nav-link" id="username"> </p>
-  </li>
-  
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -36,17 +31,43 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+         </li>
+          
+
+          <li class="nav-item">
+            <p class="nav-link" id="username"> </p>
           </li>
+
+       
         </ul>
       </div>
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+    <div class="container" id="mostrarproducto">
+       <div id="mostrarimagenes">
+
+       </div>
     </div>
+    <div id="mostrarcomentarios">
+  </div>
+</div>
+<div>
+<h3>Comentarios</h3>
+<ul id="comentarios">
+</ul>
+Comentario: <textarea id="comentario"></textarea><br>
+
+<select name="estrellitas" id="estrellas">
+  <option value="1"> 1 </option>
+  <option value="2"> 2 </option>
+  <option value="3"> 3 </option>
+  <option value="4"> 4 </option>
+  <option value="5"> 5 </option>
+</select>
+<button id="comentar">Comentar</button>
+</div> 
+    
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -65,7 +86,7 @@
       <div></div>
       <div></div>
     </div>
-  </div>
+  
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
