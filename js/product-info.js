@@ -30,7 +30,7 @@ function imagenes(product){
         htmlContentToAppend+=`<div class="col"><img src="${img}"></div>`;
 
     }
-   // document.getElementById("mostrarproducto").innerHTML+=htmlContentToAppend;
+
    return htmlContentToAppend; 
 }
 
@@ -42,6 +42,8 @@ document.addEventListener("DOMContentLoaded", function(e){
                 console.log(productInfo)
                 showProductInfo(productInfo);
                  imagenes(productInfo.images);
+
+                 mostrarRelacionados(productInfo)
             }
         });
         getJSONData(PRODUCT_INFO_COMMENTS_URL+infoID+EXT_TYPE).then(function(resultObj){
@@ -50,13 +52,16 @@ document.addEventListener("DOMContentLoaded", function(e){
                  comentarios(arraycomentarios);  
                 }
     
+// cuando le das click en comentar//
 
    document.getElementById("comentar").addEventListener("click",()=>{
      aniadircomentario();
                     })
-        });         
-      
+        });   
+
 });
+
+//mostrar comentarios 
 
 function comentarios(arraycomentarios){
  let htmlContentToAppend ="";
@@ -68,6 +73,8 @@ function comentarios(arraycomentarios){
     }    
     document.getElementById("mostrarcomentarios").innerHTML=htmlContentToAppend;
 }
+
+//estrellas selector//
 
 function puntuacion(puntos){
             
@@ -83,6 +90,10 @@ function puntuacion(puntos){
     } 
          return estrellas; 
 };
+
+
+//mostrar tiempo fecha hora,  para añadir comentarios.
+
 
 function aniadircomentario(){
     let dateTime = new Date();
@@ -109,6 +120,10 @@ function aniadircomentario(){
         second = '0' + second; 
     }
 
+
+    //añadir nuevo comentario
+
+
     let nuevoscomentarios = {};
 
     nuevoscomentarios.user = sessionStorage.getItem('user');
@@ -122,4 +137,37 @@ function aniadircomentario(){
 
     document.getElementById('comentario').value = "";
     document.getElementById('estrellas').value = "";
+}
+//decirle quien es productosID y guardarlo//
+
+function setArticulosID(id) {
+    localStorage.setItem("productID",id);
+    window.location = "product-info.html"
+
+}
+//funacionabilidad de los productos relacionados
+
+let productID = localStorage.getItem("productosID");
+
+let productosInfo = PRODUCT_INFO_URL + productID + EXT_TYPE
+
+function mostrarRelacionados (productosInfo){
+let htmlContentToAppend = ""
+
+for (let i=0; i<productosInfo.relatedProducts.length; i++){ 
+    let relacionados = productosInfo.relatedProducts[i]
+
+htmlContentToAppend+=
+`
+<div onclick="setArticulosID(${relacionados.id})  class="row" style="width:200px">
+<div "class=" list-group-item-action cursor-active">
+     <a href="product-info.html?producto= `+ relacionados.image + `"class="cursor-active list-group-item-action">
+     <h5 class="text-center">${relacionados.name}</h5>
+     <img src=${relacionados.image} class="img-thumbnail">
+         
+</div>
+</div>
+`
+} 
+document.getElementById("relacionados").innerHTML = htmlContentToAppend 
 }
